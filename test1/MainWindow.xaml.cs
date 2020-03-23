@@ -26,16 +26,16 @@ namespace test1
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ComboBox txt1 = new ComboBox();
-            txt1.HorizontalAlignment = HorizontalAlignment.Left;
-            txt1.VerticalAlignment = VerticalAlignment.Top;
-            txt1.Height = 30;
-            txt1.Width = 30;
-            txt1.Items.Add('+');
-            txt1.Items.Add('-');
-            txt1.Items.Add('*');
-            txt1.Items.Add('/');
-            Ultra.Children.Add(txt1);
+            ComboBox txtBox = new ComboBox();
+            txtBox.HorizontalAlignment = HorizontalAlignment.Left;
+            txtBox.VerticalAlignment = VerticalAlignment.Top;
+            txtBox.Height = 30;
+            txtBox.Width = 30;
+            txtBox.Items.Add('+');
+            txtBox.Items.Add('-');
+            txtBox.Items.Add('*');
+            txtBox.Items.Add('/');
+            Ultra.Children.Add(txtBox);
             TextBox txt = new TextBox();          
             txt.TextChanged += Txt_TextChanged;
             txt.HorizontalAlignment = HorizontalAlignment.Left;
@@ -46,31 +46,17 @@ namespace test1
         }
         void Sum()
         {
-            int resultSum = 0;
+            int Count = 0;
             for(var i=0;i<Ultra.Children.Count;i++)
             {
                 if(Ultra.Children[i] is TextBox)
                 {
                     TextBox textInTextbox = (TextBox)Ultra.Children[i];
-                    ComboBox boxInCombobox = (ComboBox)Ultra.Children[i];
+                    ComboBox boxInCombobox = (ComboBox)Ultra.Children[i-1];
+                    int num=0;
                     try 
                     {
-                        if(Convert.ToChar(boxInCombobox)=='+')
-                        {
-                            resultSum = resultSum + Convert.ToInt32(textInTextbox.Text);
-                        }
-                        if (Convert.ToChar(boxInCombobox) == '-')
-                        {
-                            resultSum = resultSum - Convert.ToInt32(textInTextbox.Text);
-                        }
-                        if (Convert.ToChar(boxInCombobox) == '*')
-                        {
-                            resultSum = resultSum * Convert.ToInt32(textInTextbox.Text);
-                        }
-                        if (Convert.ToChar(boxInCombobox) == '/')
-                        {
-                            resultSum = resultSum / Convert.ToInt32(textInTextbox.Text);
-                        }
+                        num = Convert.ToInt32(textInTextbox.Text);
                     }
                     catch 
                     {
@@ -81,11 +67,18 @@ namespace test1
                         else
                         {
                             MessageBox.Show("Error");
-                        }                      
-                    }                   
+                        }
+                    }
+                    switch (boxInCombobox.SelectedItem)
+                    {
+                        case '+': Count = Count + num; break;
+                        case '-': Count = Count - num; break;
+                        case '*': Count = Count * num; break;
+                        case '/': Count = Count / num; break;
+                    }
                 }
             }
-            Result.Content = "Результат= " + resultSum;
+            Result.Content = "Результат= " + Count;
         }
         private void Txt_TextChanged(object sender, TextChangedEventArgs e)
         {
