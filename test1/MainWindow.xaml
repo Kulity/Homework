@@ -7,9 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="Super">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Content="Добавление элемента" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="175" Width="209" Click="Button_Click"/>
+        <Label x:Name="Result" Content="Result=" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="175" Width="210" FontSize="18"/>
+        <Button Content="Удалить" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="85" Width="100" Click="Button_Click_1"></Button>
         <StackPanel x:Name="Ultra">
-            <Button Content="Button" HorizontalAlignment="Right" VerticalAlignment="Top" Height="175" Width="209" Click="Button_Click"/>
-            <Label x:Name="Result" Content="Result=" HorizontalAlignment="Left" Margin="282,35,0,0" VerticalAlignment="Top" Height="182" Width="410" FontFamily="Yu Gothic" FontSize="18"/>
         </StackPanel>
     </Grid>
 </Window>

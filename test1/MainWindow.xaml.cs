@@ -26,7 +26,17 @@ namespace test1
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TextBox txt = new TextBox();
+            ComboBox txt1 = new ComboBox();
+            txt1.HorizontalAlignment = HorizontalAlignment.Left;
+            txt1.VerticalAlignment = VerticalAlignment.Top;
+            txt1.Height = 30;
+            txt1.Width = 30;
+            txt1.Items.Add('+');
+            txt1.Items.Add('-');
+            txt1.Items.Add('*');
+            txt1.Items.Add('/');
+            Ultra.Children.Add(txt1);
+            TextBox txt = new TextBox();          
             txt.TextChanged += Txt_TextChanged;
             txt.HorizontalAlignment = HorizontalAlignment.Left;
             txt.VerticalAlignment = VerticalAlignment.Top;
@@ -42,9 +52,25 @@ namespace test1
                 if(Ultra.Children[i] is TextBox)
                 {
                     TextBox textInTextbox = (TextBox)Ultra.Children[i];
+                    ComboBox boxInCombobox = (ComboBox)Ultra.Children[i];
                     try 
                     {
-                        resultSum = resultSum + Convert.ToInt32(textInTextbox.Text);
+                        if(Convert.ToChar(boxInCombobox)=='+')
+                        {
+                            resultSum = resultSum + Convert.ToInt32(textInTextbox.Text);
+                        }
+                        if (Convert.ToChar(boxInCombobox) == '-')
+                        {
+                            resultSum = resultSum - Convert.ToInt32(textInTextbox.Text);
+                        }
+                        if (Convert.ToChar(boxInCombobox) == '*')
+                        {
+                            resultSum = resultSum * Convert.ToInt32(textInTextbox.Text);
+                        }
+                        if (Convert.ToChar(boxInCombobox) == '/')
+                        {
+                            resultSum = resultSum / Convert.ToInt32(textInTextbox.Text);
+                        }
                     }
                     catch 
                     {
@@ -64,6 +90,11 @@ namespace test1
         private void Txt_TextChanged(object sender, TextChangedEventArgs e)
         {
             Sum();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Ultra.Children.RemoveAt(Ultra.Children.Count - 1);Sum();
         }
     }
 }
