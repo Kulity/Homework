@@ -24,26 +24,24 @@ namespace test1
         {
             InitializeComponent();
         }
-        int y = 20;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             TextBox txt = new TextBox();
+            txt.TextChanged += Txt_TextChanged;
             txt.HorizontalAlignment = HorizontalAlignment.Left;
             txt.VerticalAlignment = VerticalAlignment.Top;
             txt.Height = 30;
             txt.Width = 120;
-            txt.Margin = new Thickness(5, y, 0, 0);
-            Super.Children.Add(txt);
-            y = y + 35;
+            Ultra.Children.Add(txt);
         }
         void Sum()
         {
             int resultSum = 0;
-            for(var i=0;i<Super.Children.Count;i++)
+            for(var i=0;i<Ultra.Children.Count;i++)
             {
-                if(Super.Children[i] is TextBox)
+                if(Ultra.Children[i] is TextBox)
                 {
-                    TextBox textInTextbox = (TextBox)Super.Children[i];
+                    TextBox textInTextbox = (TextBox)Ultra.Children[i];
                     try 
                     {
                         resultSum = resultSum + Convert.ToInt32(textInTextbox.Text);
@@ -63,13 +61,7 @@ namespace test1
             }
             Result.Content = "Результат= " + resultSum;
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Sum();
-        }
-
-        private void Window_KeyUp(object sender, KeyEventArgs e)
+        private void Txt_TextChanged(object sender, TextChangedEventArgs e)
         {
             Sum();
         }
